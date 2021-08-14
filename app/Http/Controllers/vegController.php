@@ -30,7 +30,7 @@ class vegController extends Controller
     
       
  $order = new fruit();
- $order->id=1
+ $order->id=1;
  $order->name="tomato";
  $order->price=50;
  $order->stock=100;
