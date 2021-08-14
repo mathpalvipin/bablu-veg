@@ -1,10 +1,11 @@
 <template>
-		<div  class='flex_container'>
+		<div  class='router-container'>
 
-	<router-link to='/vue1' class='btn'>veg</router-link>
+	<router-link to='/vue1' class='btn-r' >VEG</router-link>
 	<router-link to='/vue1/2' class
-	='btn'>fruit</router-link>
-
+	='btn-r'>FRUIT</router-link>
+{{showfruit}}
+{{showveg}}
   </div>
 </template>
 <!-- <template>
@@ -14,19 +15,48 @@
 
   </div>
 
-</template>
+</template> -->
 <script type="text/javascript">
 	export default {
-		 methods:{
+		 computed:{
 		 	showfruit(){
-		 		console.log(window.location.host);
-		 		window.location.href='/fruitpage'; 
+		 		console.log(window.location.pathname);
+		 		
 		 		},
 		 			showveg(){
-		 		console.log(window.location.host);
-		 		window.location.href='/vegpage'; 
+		 		console.log(window.location.pathname);
+		 		
 		 		}
 
 		 }
 	}
-</script> -->
+</script>
+<style type="text/css" scoped>
+	.btn-r{
+		 height: 7rem;
+		width: 50vw;
+ text-align: center;
+ border-radius:10rem;
+  font-size: 5rem;
+	background-color: white;
+	padding: 1rem 0;
+	line-height: 1;
+color: black;
+ 	}
+	.router-container{
+		 width: 100%;
+		 display: flex;
+
+	}
+	.btn-r.router-link-exact-active
+	{
+		 background-color:  darkorange;
+	}
+
+a{
+	  text-decoration: none;
+}
+	
+
+
+</style>

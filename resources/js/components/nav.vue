@@ -1,10 +1,14 @@
 <template>
  
-<nav class="navbar navbar-expand-lg navbar-light bg-light" >
-	<div></div>
-  <a class="navbar-brand" href="/">BABLU</a>
-  <button  @click='togglecart'  style="width: 100px;background-color: yellow;" class='btn'>Payment   </button>
-  <router-link    style="width: 100px; float:left;" class="btn btn-primary"  to='/vue1/4'>Order</router-link>
+<nav class="navbar " >
+	
+  <div><a class="navbar-brand" href="/">BABLU</a></div>
+<div class="cartoption">
+	<h4 class="total">Total: {{total}}</h4>
+  <button  @click='togglecart'  class='btn-cart'>CART</button>
+</div>
+<div class="gap" style=" height: 50px; width: 100%; background-color: #EEEDE7;"></div>
+ <!--  <router-link    style="width: 100px; float:left;" class="btn btn-primary"  to='/vue1/4'>Order</router-link> -->
  
 <!--   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
@@ -29,7 +33,7 @@
 <script type="text/javascript">
 	export default {
 		props:{
-         total:'',
+         total:0,
         lists:[],
         
 		},
@@ -37,7 +41,8 @@
          togglecart(){
          	 this.$emit('togglecart');
          }
-		},
+		
+		}
    
   
    
@@ -46,7 +51,7 @@
 	}
 
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 	.name{
 	flex: 1;
 	}
@@ -56,4 +61,37 @@
 	.flex{
 		display: flex;
 	}
+	.navbar-brand{
+		 font-size: 3rem;
+
+	}
+	.navbar{
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		align-items: center;
+		 background-color: #EEEDE7;
+		
+
+	}
+	.cartoption {
+		 width: 60vw;
+		flex-direction: row;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		
+	}
+	.total{
+		 margin-right: 1rem;
+		 font-size: 2rem;
+		 padding: .6rem ;
+	}
+	.btn-cart{
+		background-color: yellow;
+		height: 4rem;
+		font-size: 2rem;
+		width:10rem ;}
+	
 </style>

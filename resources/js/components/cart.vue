@@ -31,7 +31,7 @@
 
 
 </template>
-<script type="text/javascript">
+<script type="text/javascript" scoped>
 	export default {
 		
 		props:{

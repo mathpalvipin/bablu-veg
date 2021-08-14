@@ -39,15 +39,15 @@
 
 <script>
     export default {
-    	data(){
-    		return {
-    			fruits:''
-    		}
-    	},
+        data(){
+            return {
+                fruits:''
+            }
+        },
    
         methods:{
-        	 add(fruit){
-        	this.$store.dispatch('cart/additemstocart',fruit);        	 }
+             add(fruit){
+            this.$store.dispatch('cart/additemstocart',fruit);           }
         },
     
                   mounted(){
@@ -62,7 +62,7 @@
     }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
    input::placeholder{
   font-size:2vh;
   margin-top:5px;
