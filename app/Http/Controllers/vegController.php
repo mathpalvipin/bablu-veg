@@ -27,7 +27,7 @@ class vegController extends Controller
         return $fruit;
     }
     public function add(Request $response){
-    if($response->add="fruit"){
+    if($response->add=="fruit"){
       
  $order = new fruit();
  $order->id=$response->id;
