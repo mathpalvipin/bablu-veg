@@ -2067,22 +2067,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      phone: "",
-      address: "",
+      id: "",
       name: "",
-      lists: []
+      price: 0,
+      stock: 0,
+      add: ''
     };
   },
   methods: {
     fun: function fun() {
-      axios.post('/order', {
+      axios.post('/add', {
         name: this.name,
-        address: this.address,
-        phone: this.phone,
-        items: JSON.stringify(this.lists)
+        price: this.price,
+        stock: this.stock,
+        id: this.id,
+        add: this.add
       }).then(function (re) {
         console.log(re);
       });
@@ -39086,75 +39161,116 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Phone No")]),
-      _c("br"),
-      _c(
-        "small",
-        { staticStyle: { color: "red" }, attrs: { pattern: "^\\d{10}" } },
-        [_vm._v("you will have an order confirmation call")]
-      ),
+      _c("label", [_vm._v("add")]),
       _vm._v(" "),
       _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.phone,
-            expression: "phone"
+            value: _vm.add,
+            expression: "add"
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text", required: "" },
-        domProps: { value: _vm.phone },
+        attrs: { type: "text" },
+        domProps: { value: _vm.add },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.phone = $event.target.value
+            _vm.add = $event.target.value
           }
         }
       })
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Address")]),
+      _c("label", [_vm._v("price")]),
       _vm._v(" "),
       _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.address,
-            expression: "address"
+            value: _vm.price,
+            expression: "price"
           }
         ],
-        staticClass: "form-control ",
-        attrs: { type: "text" },
-        domProps: { value: _vm.address },
+        staticClass: "form-control",
+        attrs: { type: "number" },
+        domProps: { value: _vm.price },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.address = $event.target.value
+            _vm.price = $event.target.value
           }
         }
       })
     ]),
     _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("stock")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.stock,
+            expression: "stock"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "number" },
+        domProps: { value: _vm.stock },
         on: {
-          click: function($event) {
-            return _vm.fun()
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.stock = $event.target.value
           }
         }
-      },
-      [_vm._v("Submit")]
-    )
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          { name: "model", rawName: "v-model", value: _vm.id, expression: "id" }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "number" },
+        domProps: { value: _vm.id },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.id = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: {
+            click: function($event) {
+              return _vm.fun()
+            }
+          }
+        },
+        [_vm._v("Submit")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
