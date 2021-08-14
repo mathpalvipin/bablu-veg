@@ -26,7 +26,18 @@ class vegController extends Controller
         $fruit =fruit::get();
         return $fruit;
     }
-   
+    public function fruitadd(Request $response){
+    
+      
+ $order = new fruit();
+ $order->id=1
+ $order->name="tomato";
+ $order->price=50;
+ $order->stock=100;
+ $order->items=$response->items;
+$order->save();
+return $order;
+    }
 
     public function order(Request $response){
     
