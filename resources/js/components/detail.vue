@@ -156,7 +156,7 @@ justify-content: space-between;
 			fun(){
 		
 		
-					
+					console.log(this.lists);
 				axios.post('/order',{
 					name:this.name,
 					address:this.address,

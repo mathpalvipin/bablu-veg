@@ -2274,6 +2274,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fun: function fun() {
+      console.log(this.lists);
       axios.post('/order', {
         name: this.name,
         address: this.address,
