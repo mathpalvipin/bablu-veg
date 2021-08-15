@@ -33,6 +33,7 @@ Vue.component('cart', require('./components/cart.vue').default);
 Vue.component('detail', require('./components/detail.vue').default);
 Vue.component('router', require('./components/router.vue').default);
 Vue.component('add', require('./components/add.vue').default);
+Vue.component('totalcart', require('./components/footer.vue').default);
 
 
 const app = new Vue({

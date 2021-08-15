@@ -1,17 +1,18 @@
 <template>
-  <div class="main">
+  <div class="main" @click='hidecart()'>
   <div class="top"><nav--bar @togglecart='togglecart'  :total='total'></nav--bar>
   
     
 
     <router></router> </div>
     <div class="allcontainer">
-    <router-view :list="lists" ></router-view>
-            <div class='cart' :class="{'showcart':showcart}">
+    <router-view :lists="lists" :total='total'></router-view>
+            <div  @click='togglecart'   class='cart' :class="{'showcart':showcart}">
        
               <cart   :lists='lists' :total='total'></cart>
            </div>
   </div>
+ <totalcart class='totalcart' :total='total'></totalcart>
 </div>
 
 </template>
@@ -66,14 +67,14 @@ return Total;
  methods:{
   togglecart(){
     console.log('togglecart');
- this.showcart=!this.showcart;
+ this.showcart=true;
    this.bycart=true;
 
   },
   hidecart(){
    
  this.showcart=false;
-  console.log(this.bycart);
+  console.log('hidecar');
 if(this.bycart){
   this.showcart=true;
   this.bycart=false;
@@ -115,12 +116,12 @@ if(this.bycart){
      top: 22rem;
 
   }
-.cart{ width: 10rem;
+.cart{ width: 20rem;
   height: 100vh;
   background-color: lightgrey;
    position: fixed;
    top: 1rem;
-   right: -10rem;
+   right: -25rem;
 transition: all 1s;
 z-index: 10;
 }
@@ -128,5 +129,9 @@ z-index: 10;
   right: 0rem;
 }
 
-  
+.totalcart{
+   position: fixed ;
+   bottom: 0;
+}
+ 
 </style>

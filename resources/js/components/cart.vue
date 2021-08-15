@@ -5,11 +5,16 @@
   <li v-for="list in lists" >
   	<div class="cartitem">
   		<h2 class="name"> {{list.name}}</h2>
-  		<div class="orderquantity">{{list.quantity}} </div>
-<div class="itemprice"> {{list.price}} RS</div>
- <div class="price"> {{list.quantity*list.price}} RS</div>
- <div class="price"> <button @click='delete1(list)'>  delete</button></div>
+  		<div class="price-item">
+  		<div class="orderquantity">{{list.quantity}}<span>&#215;</span>{{list.price}}RS=</div>
+ <div class="total-price">{{list.quantity*list.price}} RS</div></div>
+ <div class="item-btn ">
+<button @click='delete1(list)' class="delete">  delete</button>
+<!--  for edit 
+	<button @click='edit(list)'> edit</button>
+	 -->
   	</div>
+  </div>
   <!-- 	<div class="flex">
    <div class="name"> {{ list.name }} </div>
    <div class="space"></div>
@@ -50,34 +55,56 @@ this.$store.dispatch('cart/deleteitem',item.cartid)
 .cartitem{
 	 position :relative;
 	 width: 100%;
-	 height: 10vh;
+	 height: 5rem;
 
 }
 .name{
 	padding: 0;
 	margin: 0;
 	 position: absolute;
-	 top: 0rem;
-	 left: 0rem;
-}
-.orderquantity{
-	 position:  absolute;
 	 top: .2rem;
-	 right: .2rem;
-}
-.itemprice{
-	 position:  absolute;
-	 bottom: .2rem;
 	 left: .2rem;
-font-size: .9rem;
 }
-.price{
-		 position:  absolute;
-	 bottom: 0rem;
+.price-item{
+	height: 2rem;
+	width: 50%;
+	 position:  absolute;
+	 top: .3rem;
 	 right: .2rem;
 font-size: 1rem;
+display: flex;
+justify-content: space-around;
+align-items: center;
 
 }
+button{
+	margin: .5rem;
+}
+
+.total-price{
+	font-size: 1rem;
+
+}
+.item-btn{
+		 position:  absolute;
+	 bottom: 0rem;
+	 width: 100%;
+font-size: 1rem;
+display: flex;
+justify-content: center;
+
+}
+.delete{
+	background-color:#F51720 ;
+	border: .1px white;
+	 border-radius: .5rem;
+	 box-shadow: 6px 3px 20px -3px rgba(0,0,0,0.66);
+-webkit-box-shadow: 6px 3px 20px -3px rgba(0,0,0,0.66);
+-moz-box-shadow: 6px 3px 20px -3px rgba(0,0,0,0.66);
+}
+
+
+
 	ul{
 		padding: 0;
 		margin-top: 1rem;
