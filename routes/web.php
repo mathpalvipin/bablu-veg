@@ -23,6 +23,7 @@ Route::get('/fruit', 'vegController@fruit');
 
 Route::post('/order', 'vegController@order');
 Route::post('/add', 'vegController@add');
+Route::post('/upload', 'vegController@upload');
 
 // Route::get('/fruits', 'vegController@fruitpage')->name('fruitpage');
 // Route::get('/vegpage', 'routerController@vegpage')->name('vegpage');

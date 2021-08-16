@@ -115,6 +115,7 @@ if(this.bycart){
      overflow-x: hidden;
      top: 22rem;
 
+
   }
 .cart{ width: 20rem;
   height: 100vh;
@@ -132,6 +133,7 @@ z-index: 10;
 .totalcart{
    position: fixed ;
    bottom: 0;
+   
 }
- 
+
 </style>

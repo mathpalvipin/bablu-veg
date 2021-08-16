@@ -1,7 +1,12 @@
 <template>
 	
-<div>
+<div class="add">
 	
+	 <form @submit="formSubmit" enctype="multipart/form-data">
+                            <input type="file" class="form-control" v-on:change="onChange">
+                            <button class="btn  btn-block">Upload</button>
+                        </form>
+
 		
 		 <div class="form-group">
     <label  >Name</label>
@@ -26,20 +31,27 @@
    <div class="form-group">
     <label  >id</label>
     <input type="number" class="form-control"  v-model="id">
-  
+ </div>
+	
+ 
  
   
 
   <button   @click="fun()" class="btn btn-primary">Submit</button>
 
+
+
 </div>
-</div>
+
 
 </template>
 
 		<style type="text/css">
 	label{
 		margin-bottom: 0px;
+	}
+	.add{
+		margin-bottom:5rem;
 	}
 </style>
 <script type="text/javascript">
@@ -50,24 +62,53 @@
 			name:"",
 			price:0,
 			stock:0,
-			add:''
+			add:'',
+imagelink:'',
+file:''
 			 }
 		},
 
 		methods:{
+			
 			fun(){
-		
-		
-					
+         	
 				axios.post('/add',{
 					name:this.name,
 					price:this.price,
 					stock:this.stock,
 					id:this.id,
-					add:this.add
+					add:this.add,
+					imagelink:this.imagelink
 					
 				}).then((re)=>{console.log(re)});
-			}
+			},
+			onChange(e) {
+                this.file = e.target.files[0];
+                console.log( e.target.files[0]);
+              this.imagelink=e.target.files[0].name; 
+                         },
+            formSubmit(e) {
+                e.preventDefault();
+                let existingObj = this;
+
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                }
+
+                let data = new FormData();
+                data.append('file', this.file);
+data.append('addto',this.add);
+                axios.post('/upload', data, config)
+                    .then(function (res) {
+                        existingObj.success = res.data.success;
+                    })
+                    .catch(function (err) {
+                        existingObj.output = err;
+                    });
+            }
+
 		}
 }
 </script>

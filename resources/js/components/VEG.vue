@@ -6,7 +6,8 @@
  <div class="card "  v-for="veg in vegs" >
    <div class="flex_con">
     <div class="img flex1">
-  <img src="/images/tamato.PNG" alt="Avatar"  class='img'>
+
+  <img :src="'/storage/veg/'+veg.link" alt="avtar"  class='img'>
   
   </div>
   <div class=" flex1">
@@ -39,7 +40,7 @@
         data(){
             return {
               vegs:'',
-              lists:[]
+            
             };
         },
     
@@ -51,13 +52,17 @@
           }
            },
                mounted(){
-               
+              
                 if(this.$store.getters['getvegs']!='')
              this.vegs= this.$store.getters['getvegs'];
          else{
         axios.get('/veg').then((response)=>{
             this.vegs=response.data;
-        })}
+        });
+
+    }
+     console.log(this.vegs);
+        
 }
 
     

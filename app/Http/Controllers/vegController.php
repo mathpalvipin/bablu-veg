@@ -34,22 +34,35 @@ class vegController extends Controller
  $order->name=$response->name;
  $order->price=$response->price;
  $order->stock=$response->stock;
+ $order->link=$response->imagelink;
     
  
 $order->save();
 }
 else{
+
     $order = new veg();
  $order->id=$response->id;
  $order->name=$response->name;
  $order->price=$response->price;
  $order->stock=$response->stock;
-    
- 
+$order->link=$response->imagelink;
 $order->save();
 }
 
 return $order;
+    }
+
+     public function upload(Request $request){
+      $addto=$request->addto;
+   
+
+ $filename=$request->file('file')->getClientoriginalName();
+
+
+$filenamefinal=$filename;
+$path=$request->file('file')->storeAs('public/'.$addto,$filenamefinal);
+    
     }
 
     public function order(Request $response){

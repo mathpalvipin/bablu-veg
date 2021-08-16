@@ -18,6 +18,7 @@ class CreateVEGSTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->integer('stock');
+            $table->string('link');
             $table->timestamps();
         });
     }

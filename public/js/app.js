@@ -1944,11 +1944,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      vegs: '',
-      lists: []
+      vegs: ''
     };
   },
   methods: {
@@ -1964,6 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.vegs = response.data;
       });
     }
+    console.log(this.vegs);
   }
 });
 
@@ -2022,6 +2023,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2029,7 +2042,9 @@ __webpack_require__.r(__webpack_exports__);
       name: "",
       price: 0,
       stock: 0,
-      add: ''
+      add: '',
+      imagelink: '',
+      file: ''
     };
   },
   methods: {
@@ -2039,9 +2054,32 @@ __webpack_require__.r(__webpack_exports__);
         price: this.price,
         stock: this.stock,
         id: this.id,
-        add: this.add
+        add: this.add,
+        imagelink: this.imagelink
       }).then(function (re) {
         console.log(re);
+      });
+    },
+    onChange: function onChange(e) {
+      this.file = e.target.files[0];
+      console.log(e.target.files[0]);
+      this.imagelink = e.target.files[0].name;
+    },
+    formSubmit: function formSubmit(e) {
+      e.preventDefault();
+      var existingObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var data = new FormData();
+      data.append('file', this.file);
+      data.append('addto', this.add);
+      axios.post('/upload', data, config).then(function (res) {
+        existingObj.success = res.data.success;
+      })["catch"](function (err) {
+        existingObj.output = err;
       });
     }
   }
@@ -7031,7 +7069,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel{\n\tmargin-bottom: 0px;\n}\n", ""]);
+exports.push([module.i, "\nlabel{\n\tmargin-bottom: 0px;\n}\n.add{\n\tmargin-bottom:5rem;\n}\n", ""]);
 
 // exports
 
@@ -7126,7 +7164,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.top[data-v-c176d7f8] {\r\n   height: auto;\r\n   position: fixed;\r\n   z-index: 5;\n}\nbutton[data-v-c176d7f8]{\r\n    width: 100%;\n}\n.payment[data-v-c176d7f8]{\r\n    padding:10px;\n}\n.flex_container[data-v-c176d7f8]{ \r\n    display:flex;\r\n    margin-bottom:50px;\n}\n.btn[data-v-c176d7f8]{\r\n    flex:1;\r\n    border:1px solid lightgrey;\n}\n.allcontainer[data-v-c176d7f8]{\r\n     position: relative;\r\n     width: 100%;\r\n     height: 100vh;\r\n     overflow-x: hidden;\r\n     top: 22rem;\n}\n.cart[data-v-c176d7f8]{ width: 20rem;\r\n  height: 100vh;\r\n  background-color: lightgrey;\r\n   position: fixed;\r\n   top: 1rem;\r\n   right: -25rem;\r\ntransition: all 1s;\r\nz-index: 10;\n}\n.showcart[data-v-c176d7f8]{\r\n  right: 0rem;\n}\n.totalcart[data-v-c176d7f8]{\r\n   position: fixed ;\r\n   bottom: 0;\n}\r\n \r\n", ""]);
+exports.push([module.i, "\n.top[data-v-c176d7f8] {\r\n   height: auto;\r\n   position: fixed;\r\n   z-index: 5;\n}\nbutton[data-v-c176d7f8]{\r\n    width: 100%;\n}\n.payment[data-v-c176d7f8]{\r\n    padding:10px;\n}\n.flex_container[data-v-c176d7f8]{ \r\n    display:flex;\r\n    margin-bottom:50px;\n}\n.btn[data-v-c176d7f8]{\r\n    flex:1;\r\n    border:1px solid lightgrey;\n}\n.allcontainer[data-v-c176d7f8]{\r\n     position: relative;\r\n     width: 100%;\r\n     height: 100vh;\r\n     overflow-x: hidden;\r\n     top: 22rem;\n}\n.cart[data-v-c176d7f8]{ width: 20rem;\r\n  height: 100vh;\r\n  background-color: lightgrey;\r\n   position: fixed;\r\n   top: 1rem;\r\n   right: -25rem;\r\ntransition: all 1s;\r\nz-index: 10;\n}\n.showcart[data-v-c176d7f8]{\r\n  right: 0rem;\n}\n.totalcart[data-v-c176d7f8]{\r\n   position: fixed ;\r\n   bottom: 0;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -39204,7 +39242,12 @@ var render = function() {
     _vm._l(_vm.vegs, function(veg) {
       return _c("div", { staticClass: "card " }, [
         _c("div", { staticClass: "flex_con" }, [
-          _vm._m(0, true),
+          _c("div", { staticClass: "img flex1" }, [
+            _c("img", {
+              staticClass: "img",
+              attrs: { src: "/storage/veg/" + veg.link, alt: "avtar" }
+            })
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: " flex1" }, [
             _c("h4", { staticClass: "name" }, [
@@ -39274,19 +39317,7 @@ var render = function() {
     0
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "img flex1" }, [
-      _c("img", {
-        staticClass: "img",
-        attrs: { src: "/images/tamato.PNG", alt: "Avatar" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39308,7 +39339,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "add" }, [
+    _c(
+      "form",
+      {
+        attrs: { enctype: "multipart/form-data" },
+        on: { submit: _vm.formSubmit }
+      },
+      [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "file" },
+          on: { change: _vm.onChange }
+        }),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn  btn-block" }, [_vm._v("Upload")])
+      ]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", [_vm._v("Name")]),
       _vm._v(" "),
@@ -39432,21 +39480,21 @@ var render = function() {
             _vm.id = $event.target.value
           }
         }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          on: {
-            click: function($event) {
-              return _vm.fun()
-            }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        on: {
+          click: function($event) {
+            return _vm.fun()
           }
-        },
-        [_vm._v("Submit")]
-      )
-    ])
+        }
+      },
+      [_vm._v("Submit")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -39722,7 +39770,7 @@ var render = function() {
     { staticClass: "footer" },
     [
       _c("div", { staticClass: "total" }, [
-        _vm._v("  " + _vm._s(_vm.total) + "\n")
+        _vm._v("Total " + _vm._s(_vm.total) + "\n")
       ]),
       _vm._v(" "),
       _c(
@@ -57561,7 +57609,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_fruit_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/fruit.vue */ "./resources/js/components/fruit.vue");
 /* harmony import */ var _components_cart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/cart.vue */ "./resources/js/components/cart.vue");
 /* harmony import */ var _components_detail_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/detail.vue */ "./resources/js/components/detail.vue");
-/* harmony import */ var _components_add_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/add.vue */ "./resources/js/components/add.vue");
+/* harmony import */ var _components_add_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/add.vue */ "./resources/js/components/add.vue");
 
 
 
@@ -57581,7 +57629,7 @@ var routes = [{
   component: _components_detail_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: '/vue1/5',
-  component: _components_add_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _components_add_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }];
 
 /***/ }),

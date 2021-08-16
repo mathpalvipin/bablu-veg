@@ -1,6 +1,6 @@
 <template>
 	<div class="footer">
-		<div class="total">  {{total}}
+		<div class="total">Total {{total}}
 </div>	
   <router-link    style="width: 100px; float:left;" class="btn "  to='/vue1/4'>Order</router-link>
 
@@ -27,6 +27,6 @@
 		 font-size: 1.2rem;
 	}
 	.total{
-
+   
 	}
 </style>
