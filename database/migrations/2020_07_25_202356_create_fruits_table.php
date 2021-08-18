@@ -18,7 +18,7 @@ class CreateFruitsTable extends Migration
                  $table->string('name');
             $table->integer('price');
             $table->integer('stock');
-            $table->integer('link');
+            $table->string('link');
             $table->timestamps();
         });
     }
