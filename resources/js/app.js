@@ -10,6 +10,8 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
+import VueSimpleAlert from "vue-simple-alert";
+Vue.use(VueSimpleAlert);
 import { routes } from './router.js';
 const router = new VueRouter({
     mode: 'history',
@@ -34,6 +36,7 @@ Vue.component('detail', require('./components/detail.vue').default);
 Vue.component('router', require('./components/router.vue').default);
 Vue.component('add', require('./components/add.vue').default);
 Vue.component('totalcart', require('./components/footer.vue').default);
+
 
 
 const app = new Vue({

@@ -9,7 +9,7 @@
            <div class="card "  v-for="fruit in fruits" >
    <div class="flex_con">
     <div class="img flex1">
-  <img src="/images/tamato.PNG" alt="Avatar"  class='img'>
+ <img :src="'/images/fruit/'+fruit.link" :alt="fruit.name"  class='img'>
   
   </div>
   <div class=" flex1">
@@ -80,6 +80,7 @@
 
 .img{
     width: 15vh;
+    object-fit: cover;
 }
 .flex_con{
   display:flex;

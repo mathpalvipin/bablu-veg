@@ -15,10 +15,10 @@ class vegController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function veg()
-    { 
+    {  
         $veg = VEG::get();
-        return $veg;
 
+        return $veg;
         //
     }
     
@@ -61,7 +61,7 @@ return $order;
 
 
 $filenamefinal=$filename;
-$path=$request->file('file')->storeAs('public/'.$addto,$filenamefinal);
+// $path=$request->file('file')->storeAs('public/'.$addto,$filenamefinal);
     
     }
 

@@ -45,6 +45,22 @@ deleteitem(state,payload){
 	
 	
  //localStorage.setItem("cart",JSON.stringify(state.cart));
+},
+edititem(state,payload){
+	console.log(state.cart);
+	console.log(payload.id);
+	let arr =state.cart;
+	for (var i = arr.length - 1; i >= 0; i--) {
+		if(arr[i].cartid==payload.id){
+
+	arr[i].quantity=payload.quantity;
+		}
+	}
+	return payload ;
+	//console.log(state.cart);
+	
+	
+ //localStorage.setItem("cart",JSON.stringify(state.cart));
 }
 
 },
@@ -69,6 +85,10 @@ context.commit('additemstocart',clone);
 	 deleteitem(context,payload){
 		console.log('deleteitemfromcart');
 	     context.commit('deleteitem',payload);
+	},
+	 edititem(context,payload){
+		console.log('editcartitem');
+	     context.commit('edititem',payload);
 	}
 
 }

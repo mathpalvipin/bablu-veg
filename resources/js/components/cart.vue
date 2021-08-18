@@ -6,13 +6,15 @@
   	<div class="cartitem">
   		<h2 class="name"> {{list.name}}</h2>
   		<div class="price-item">
-  		<div class="orderquantity">{{list.quantity}}<span>&#215;</span>{{list.price}}RS=</div>
+  		<div class="orderquantity">{{list.quantity}}
+<!-- <popup :quantity='quantity' v-show="showpopup" @save='edit(list)'></popup> -->
+<span>&#215;</span>{{list.price}}RS=</div>
  <div class="total-price">{{list.quantity*list.price}} RS</div></div>
  <div class="item-btn ">
 <button @click='delete1(list)' class="delete">  delete</button>
-<!--  for edit 
-	<button @click='edit(list)'> edit</button>
-	 -->
+ 
+	<button @click='togglepopup(list)'> edit</button>
+	
   	</div>
   </div>
   <!-- 	<div class="flex">
@@ -38,7 +40,12 @@
 </template>
 <script type="text/javascript" scoped>
 	export default {
-		
+		data(){
+			return {
+				quantity:0,
+				
+			};
+		},
 		props:{
          total:'',
         lists:''
@@ -47,11 +54,30 @@
 			 delete1(item){
             console.log(item);
 this.$store.dispatch('cart/deleteitem',item.cartid)
+          },
+          togglepopup(item){
+          this.$prompt("Enter Quantity").then((text) => {
+ this.quantity=parseInt(text);
+this.edit(item);
+});
+
+          },
+          edit(item){
+
+         let 	data={
+          		'id':item.cartid,
+          		'quantity':this.quantity
+          	};
+          	console.log(data);
+          	this.$store.dispatch('cart/edititem',data);
           }
  			}
 		}
 </script>
 <style type="text/css" scoped>
+input{
+	width: 1rem;
+}
 .cartitem{
 	 position :relative;
 	 width: 100%;

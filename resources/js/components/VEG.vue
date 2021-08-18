@@ -7,7 +7,7 @@
    <div class="flex_con">
     <div class="img flex1">
 
-  <img :src="'/storage/veg/'+veg.link" alt="avtar"  class='img'>
+  <img :src="'/images/veg/'+veg.link" alt="avtar"  class='img'>
   
   </div>
   <div class=" flex1">
