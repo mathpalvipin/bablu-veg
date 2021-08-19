@@ -52,8 +52,20 @@
         
 		},methods:{
 			 delete1(item){
-            console.log(item);
-this.$store.dispatch('cart/deleteitem',item.cartid)
+           
+           const clone = JSON.parse(JSON.stringify(item));
+this.$store.dispatch('cart/deleteitem',clone.cartid).then(res=>{
+
+	if(res.status='ok')
+{console.log(clone);
+	 const data={
+            'item':clone,
+
+             'color':'green'}
+	this.$emit('shownotification',data);
+
+}
+})
           },
           togglepopup(item){
           this.$prompt("Enter Quantity").then((text) => {
@@ -68,8 +80,15 @@ this.edit(item);
           		'id':item.cartid,
           		'quantity':this.quantity
           	};
-          	console.log(data);
-          	this.$store.dispatch('cart/edititem',data);
+          	
+          	this.$store.dispatch('cart/edititem',data).then(res=>{
+          		if(res.status=='ok'){
+          			 const data={
+            'item':item, 
+            'color':'green'}
+	this.$emit('shownotification',data);
+          		}
+          	});
           }
  			}
 		}

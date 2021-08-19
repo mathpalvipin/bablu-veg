@@ -46,10 +46,26 @@
     
         methods:{
              add(veg){
-            
- this.$store.dispatch('cart/additemstocart',veg);
+                if(veg.quantity==0){
+                    return 0;
+                }
+            const clone = JSON.parse(JSON.stringify(veg));
+ this.$store.dispatch('cart/additemstocart',clone).then(res=>{
+    
+    if(res.status=='ok'){
+        console.log('itemadded');
+        
+        const data={
+            'item':clone,
+             'color':'green'}
+
+            this.$emit('shownotification',data);
+           veg.quantity='';
+    }
+ });
 
           }
+
            },
                mounted(){
               

@@ -1,18 +1,36 @@
 <template>
   <div class="main" @click='hidecart()'>
-  <div class="top"><nav--bar @togglecart='togglecart'  :total='total'></nav--bar>
-  
+     <notification  
+                    :notificationdata="notificationdata">
+                    </notification>
+  <div class="top">
+    <nav--bar @togglecart='togglecart'
+              :total='total'>
+    </nav--bar>
+ 
     
 
-    <router></router> </div>
-    <div class="allcontainer">
-    <router-view :lists="lists" :total='total'></router-view>
-            <div  @click='togglecart'   class='cart' :class="{'showcart':showcart}">
-       
-              <cart   :lists='lists' :total='total'></cart>
-           </div>
+    <router>
+    </router>
   </div>
- <totalcart class='totalcart' :total='total'></totalcart>
+        <div class="allcontainer">
+             <router-view :lists="lists"
+                          :total='total'
+                          @shownotification="shownotification">
+              </router-view>
+            <div  @click='togglecart' 
+                  class='cart' 
+                  :class="{'showcart':showcart}">
+       
+                  <cart  :lists='lists' 
+                        :total='total'
+                        @shownotification="shownotification">
+                  </cart>
+           </div>
+        </div>
+    <totalcart class='totalcart' 
+               :total='total'>
+    </totalcart>
 </div>
 
 </template>
@@ -24,8 +42,8 @@
         return {
           showcart:false,
            bycart:false,
-          
-          
+         
+          notificationdata:''       
          };
       },
     
@@ -79,6 +97,14 @@ if(this.bycart){
   this.showcart=true;
   this.bycart=false;
 }
+  },
+  shownotification(data){
+    
+    this.notifshow=true;
+    this.notificationdata=data;
+    setTimeout(() => {  this.notificationdata=''; }, 1000);
+
+    
   }
 
  }

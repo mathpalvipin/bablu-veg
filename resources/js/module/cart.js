@@ -41,6 +41,7 @@ deleteitem(state,payload){
 	console.log(state.cart);
 	state.cart =state.cart.filter(id=>{
 		return id.cartid!==payload})
+	
 	//console.log(state.cart);
 	
 	
@@ -66,8 +67,8 @@ edititem(state,payload){
 },
 actions:{
 	additemstocart(context,payload){
-		console.log('additemstocart');
-		   const clone = JSON.parse(JSON.stringify(payload));
+	
+		   
 		const d= new Date();
 		 let id=d.getDate();
 		 
@@ -77,18 +78,34 @@ id+=""+d.getHours();
 id+= ""+d.getMinutes();
 id+= ""+d.getSeconds();
 id+= ""+d.getMilliseconds();
-clone.cartid=id;
+payload.cartid=id;
 console.log(id);
 
-context.commit('additemstocart',clone);
+context.commit('additemstocart',payload);
+let data={
+		'status':'ok'
+}
+
+return data;
 	},
 	 deleteitem(context,payload){
 		console.log('deleteitemfromcart');
 	     context.commit('deleteitem',payload);
+	
+let data={
+		'status':'ok'
+}
+return data;
+
 	},
 	 edititem(context,payload){
 		console.log('editcartitem');
 	     context.commit('edititem',payload);
+	     let data={
+		'status':'ok'
+}
+return data;
+
 	}
 
 }

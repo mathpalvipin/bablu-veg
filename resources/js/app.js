@@ -36,6 +36,7 @@ Vue.component('detail', require('./components/detail.vue').default);
 Vue.component('router', require('./components/router.vue').default);
 Vue.component('add', require('./components/add.vue').default);
 Vue.component('totalcart', require('./components/footer.vue').default);
+Vue.component('notification', require('./components/notification.vue').default);
 
 
 
