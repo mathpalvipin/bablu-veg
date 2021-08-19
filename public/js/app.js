@@ -7074,7 +7074,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput::-moz-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput:-ms-input-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput::-ms-input-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput::placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\n.flex-container {\n  padding: 0;\n \n  display: flex;\n}\n.wrap    {\n  flex-wrap: wrap;\n}\n.img{\n    width: 15vh;\n}\n.flex_con{\n  display:flex;\n}\n.flex1{\n  flex:1;\n}\n.name{font-size:20px;\n margin:5px;\n margin-bottom:20px; \n margin-top:20px;\n  text-align: left;\n}\n.price\n{\n  font-size:1.2vh; \n   text-align: left; \n   margin:5px\n}\n", ""]);
+exports.push([module.i, "\ninput::-moz-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput:-ms-input-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput::-ms-input-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput::placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\n.flex-container {\r\n  padding: 0;\r\n \r\n  display: flex;\n}\n.wrap    {\r\n  flex-wrap: wrap;\n}\n.img{\r\n    width: 15vh;\n}\n.flex_con{\r\n  display:flex;\n}\n.flex1{\r\n  flex:1;\n}\n.name{font-size:20px;\r\n margin:5px;\r\n margin-bottom:20px; \r\n margin-top:20px;\r\n  text-align: left;\n}\n.price\r\n{\r\n  font-size:1.2vh; \r\n   text-align: left; \r\n   margin:5px\n}\r\n", ""]);
 
 // exports
 
@@ -60791,8 +60791,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! V:\HTML\Laravel\advnebablu backup new\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! V:\HTML\Laravel\advnebablu backup new\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! V:\HTML\Laravel\bablu-shop\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! V:\HTML\Laravel\bablu-shop\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
