@@ -62,6 +62,9 @@ edititem(state,payload){
 	
 	
  //localStorage.setItem("cart",JSON.stringify(state.cart));
+},
+clearcart(state){
+  state.cart=[];
 }
 
 },
@@ -106,6 +109,9 @@ return data;
 }
 return data;
 
+	},
+	clearcart(context){
+		 context.commit('clearcart');
 	}
 
 }

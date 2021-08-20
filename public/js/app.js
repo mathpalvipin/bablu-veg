@@ -2394,6 +2394,10 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$emit('shownotification', data);
         }
+
+        _this.$store.dispatch('cart/clearcart');
+
+        _this.$router.push('/vue1');
       });
     },
     delete1: function delete1(item) {
@@ -61042,6 +61046,9 @@ __webpack_require__.r(__webpack_exports__);
 
       return payload; //console.log(state.cart);
       //localStorage.setItem("cart",JSON.stringify(state.cart));
+    },
+    clearcart: function clearcart(state) {
+      state.cart = [];
     }
   },
   actions: {
@@ -61077,6 +61084,9 @@ __webpack_require__.r(__webpack_exports__);
         'status': 'ok'
       };
       return data;
+    },
+    clearcart: function clearcart(context) {
+      context.commit('clearcart');
     }
   }
 });

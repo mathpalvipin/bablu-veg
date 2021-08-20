@@ -171,6 +171,9 @@ justify-content: space-between;
              'for':'order'}
 	this.$emit('shownotification',data);
             }
+            this.$store.dispatch('cart/clearcart')
+           this.$router.push('/vue1')
+
 				});
 			},
 
