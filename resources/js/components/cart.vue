@@ -61,7 +61,7 @@ this.$store.dispatch('cart/deleteitem',clone.cartid).then(res=>{
 	 const data={
             'item':clone,
 
-             'color':'green'}
+             'for':'Delete'}
 	this.$emit('shownotification',data);
 
 }
@@ -85,7 +85,7 @@ this.edit(item);
           		if(res.status=='ok'){
           			 const data={
             'item':item, 
-            'color':'green'}
+            'for':'edit'}
 	this.$emit('shownotification',data);
           		}
           	});

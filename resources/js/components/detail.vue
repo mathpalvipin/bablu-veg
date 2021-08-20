@@ -34,9 +34,9 @@
  <div class="total-price">{{list.quantity*list.price}} RS</div></div>
  <div class="item-btn ">
 <button @click='delete1(list)' class="delete">  delete</button>
-<!--  for edit 
-	<button @click='edit(list)'> edit</button>
-	 -->
+ 
+	<button @click='togglepopup(list)'> edit</button>
+	
   	</div>
   </div>
   <!-- 	<div class="flex">
@@ -162,13 +162,58 @@ justify-content: space-between;
 					address:this.address,
 					phone:this.phone,
 					items:JSON.stringify(this.lists)
-				}).then((re)=>{console.log(re)});
+				}).then((re)=>{
+         if(re.status==201)
+            {
+            	 const data={
+            'message':"ordered sucessful",
+
+             'for':'order'}
+	this.$emit('shownotification',data);
+            }
+				});
 			},
 
 			 delete1(item){
-            console.log(item);
-this.$store.dispatch('cart/deleteitem',item.cartid)
+            
+            const clone = JSON.parse(JSON.stringify(item));
+this.$store.dispatch('cart/deleteitem',item.cartid).then(res=>{
+
+	if(res.status='ok')
+{console.log(clone);
+	 const data={
+            'item':clone,
+
+             'for':'delete'}
+	this.$emit('shownotification',data);
+
+}
+});
+          },
+           togglepopup(item){
+          this.$prompt("Enter Quantity").then((text) => {
+ this.quantity=parseInt(text);
+this.edit(item);
+});
+
+          },
+          edit(item){
+
+         let 	data={
+          		'id':item.cartid,
+          		'quantity':this.quantity
+          	};
+          	
+          	this.$store.dispatch('cart/edititem',data).then(res=>{
+          		if(res.status=='ok'){
+          			 const data={
+            'item':item, 
+            'for':'edit'}
+	this.$emit('shownotification',data);
+          		}
+          	});
           }
+ 		
  			
 		}
 }

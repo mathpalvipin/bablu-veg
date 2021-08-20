@@ -1,8 +1,11 @@
 <template>
 	<transition  name="shownot" >
 	<div class="notification" v-if="data">
-	<h2> {{data.name}}
+		<h2 > {{data.message}}
 	</h2>
+	<h2 v-if="data.name">{{data.name}}
+	</h2>
+	
 	
  <div class="orderquantity" v-show='data.quantity'>
  	{{data.quantity}}
@@ -16,8 +19,8 @@
 		 props:['notificationdata'],
  computed:{
  	data(){
- 		console.log();
-  return this.notificationdata.item?this.notificationdata.item:''; 
+ 		
+  return this.notificationdata.item?this.notificationdata.item:this.notificationdata; 
 },
 
  }

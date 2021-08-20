@@ -2175,7 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(clone);
           var data = {
             'item': clone,
-            'color': 'green'
+            'for': 'Delete'
           };
 
           _this.$emit('shownotification', data);
@@ -2202,7 +2202,7 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 'ok') {
           var _data = {
             'item': item,
-            'color': 'green'
+            'for': 'edit'
           };
 
           _this3.$emit('shownotification', _data);
@@ -2377,6 +2377,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fun: function fun() {
+      var _this = this;
+
       console.log(this.lists);
       axios.post('/order', {
         name: this.name,
@@ -2384,12 +2386,58 @@ __webpack_require__.r(__webpack_exports__);
         phone: this.phone,
         items: JSON.stringify(this.lists)
       }).then(function (re) {
-        console.log(re);
+        if (re.status == 201) {
+          var data = {
+            'message': "ordered sucessful",
+            'for': 'order'
+          };
+
+          _this.$emit('shownotification', data);
+        }
       });
     },
     delete1: function delete1(item) {
-      console.log(item);
-      this.$store.dispatch('cart/deleteitem', item.cartid);
+      var _this2 = this;
+
+      var clone = JSON.parse(JSON.stringify(item));
+      this.$store.dispatch('cart/deleteitem', item.cartid).then(function (res) {
+        if (res.status = 'ok') {
+          console.log(clone);
+          var data = {
+            'item': clone,
+            'for': 'delete'
+          };
+
+          _this2.$emit('shownotification', data);
+        }
+      });
+    },
+    togglepopup: function togglepopup(item) {
+      var _this3 = this;
+
+      this.$prompt("Enter Quantity").then(function (text) {
+        _this3.quantity = parseInt(text);
+
+        _this3.edit(item);
+      });
+    },
+    edit: function edit(item) {
+      var _this4 = this;
+
+      var data = {
+        'id': item.cartid,
+        'quantity': this.quantity
+      };
+      this.$store.dispatch('cart/edititem', data).then(function (res) {
+        if (res.status == 'ok') {
+          var _data = {
+            'item': item,
+            'for': 'edit'
+          };
+
+          _this4.$emit('shownotification', _data);
+        }
+      });
     }
   }
 });
@@ -2702,12 +2750,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['notificationdata'],
   computed: {
     data: function data() {
-      console.log();
-      return this.notificationdata.item ? this.notificationdata.item : '';
+      return this.notificationdata.item ? this.notificationdata.item : this.notificationdata;
     }
   }
 });
@@ -42862,6 +42912,18 @@ var render = function() {
                     }
                   },
                   [_vm._v("  delete")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.togglepopup(list)
+                      }
+                    }
+                  },
+                  [_vm._v(" edit")]
                 )
               ])
             ])
@@ -43184,7 +43246,11 @@ var render = function() {
   return _c("transition", { attrs: { name: "shownot" } }, [
     _vm.data
       ? _c("div", { staticClass: "notification" }, [
-          _c("h2", [_vm._v(" " + _vm._s(_vm.data.name) + "\n\t")]),
+          _c("h2", [_vm._v(" " + _vm._s(_vm.data.message) + "\n\t")]),
+          _vm._v(" "),
+          _vm.data.name
+            ? _c("h2", [_vm._v(_vm._s(_vm.data.name) + "\n\t")])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",
