@@ -2,10 +2,7 @@
 	
 <div class="add">
 	
-	 <form @submit="formSubmit" enctype="multipart/form-data">
-                            <input type="file" class="form-control" v-on:change="onChange">
-                            <button class="btn  btn-block">Upload</button>
-                        </form>
+	
 
 		
 		 <div class="form-group">
@@ -15,7 +12,11 @@
   </div>
    <div class="form-group">
     <label  >add</label>
-    <input type="text" class="form-control"  v-model="add">
+    <select class="Addto" v-model="add">
+  <option value="fruit">Fruit</option>
+  <option value="veg">veg</option>
+ </select>
+   <!--  <input type="text" class="form-control"  v-model="add"> -->
   
   </div>
    <div class="form-group">
@@ -33,7 +34,10 @@
     <input type="number" class="form-control"  v-model="id">
  </div>
 	
- 
+  <form @submit="formSubmit" enctype="multipart/form-data">
+                            <input type="file" class="form-control" v-on:change="onChange">
+                            <button class="btn  btn-block">Upload</button>
+                        </form>
  
   
 
@@ -102,6 +106,7 @@ file:''
 data.append('addto',this.add);
                 axios.post('/upload', data, config)
                     .then(function (res) {
+                    	console.log(res);
                         existingObj.success = res.data.success;
                     })
                     .catch(function (err) {

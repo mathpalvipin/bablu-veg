@@ -8,24 +8,18 @@
 
            <div class="card "  v-for="fruit in fruits" >
    <div class="flex_con">
-    <div class="img flex1">
+    <div class="img ">
  <img :src="'/images/fruit/'+fruit.link" :alt="fruit.name"  class='img'>
   
   </div>
-  <div class=" flex1">
+  <div class="">
      <h4 class="name"> <b>{{fruit.name}}</b></h4>
  
     <h4   class="price">price :{{fruit.price}}rs/kg</h4>
     <h4 class="price"> amount={{fruit.quanity*fruit.price}}</h4>
        </div>
-      <div class="Add flex1">
-        <input type="text" v-model='fruit.quantity' height style="width:100%; height:4.5vh; margin-top:2vh;
-        margin-bottom:1vh; font-size:2vh;
-        " placeholder="ADD-Quantity">
-        
-
-
-        <button class="btn btn-primary" @click="add(fruit)"  style=" padding: 0px; font-size:20px ; width: 80%; height:30px;">ADD</button>
+      <div class="Add 1">
+      <button class="btnadd btn-primary" @click="add(fruit)"  style=" padding: 0px; font-size:20px ; width: 80%; height:30px;">ADD quantity</button>
     </div>
   </div>
   </div>
@@ -48,6 +42,9 @@
    
         methods:{
              add(fruit){
+                    this.$prompt("Enter Quantity of : "+ fruit.name).then((text) => {
+ fruit.quantity=parseInt(text);
+
                 if(fruit.quantity==0){
                     return 0;
                 }
@@ -65,7 +62,10 @@
          
           fruit.quantity='';
          }           
-     });}
+     });
+            });
+
+        }
         },
     
                   mounted(){
@@ -86,10 +86,12 @@
   margin-top:5px;
 
 }
-   .flex-container {
-  padding: 0;
+   .flex_con {
  
-  display: flex;
+  padding: 0;
+ width: 100%;
+  display: flex;justify-content: space-between;
+  align-items: center;
 }
 .wrap    { 
   -webkit-flex-wrap: wrap;
@@ -100,12 +102,7 @@
     width: 15vh;
     object-fit: cover;
 }
-.flex_con{
-  display:flex;
-}
-.flex1{
-  flex:1;
-}
+
 .name{font-size:20px;
  margin:5px;
  margin-bottom:20px; 
@@ -118,5 +115,15 @@
   font-size:1.2vh; 
    text-align: left; 
    margin:5px
+}
+.btnadd{
+     width: 10rem;
+     padding: 0px;
+      font-size:20px ;
+       height:30px;
+       margin-right: 2rem;
+}
+.add{
+    width: 100%;
 }
 </style>

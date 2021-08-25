@@ -5,25 +5,19 @@
          <div>    
  <div class="card "  v-for="veg in vegs" >
    <div class="flex_con">
-    <div class="img flex1">
+    <div class="img ">
 
   <img :src="'/images/veg/'+veg.link" alt="avtar"  class='img'>
   
   </div>
-  <div class=" flex1">
+  <div class=" ">
      <h4 class="name"> <b>{{veg.name}}</b></h4>
  
     <h4   class="price">price :{{veg.price}}rs/kg</h4>
     <h4 class="price"> amount={{veg.quanity*veg.price}}</h4>
        </div>
-      <div class="Add flex1">
-        <input type="text" v-model='veg.quantity' height style="width:100%; height:4.5vh; margin-top:2vh;
-        margin-bottom:1vh; font-size:2vh;
-        " placeholder="ADD-Quantity">
-        
-
-
-        <button class="btn btn-primary" @click="add(veg)"  style=" padding: 0px; font-size:20px ; width: 80%; height:30px;">ADD</button>
+      <div class="Add ">
+         <button class="btnadd btn-primary" @click="add(veg)"  >ADD Quantity</button>
           
     </div>
   </div>
@@ -45,7 +39,10 @@
         },
     
         methods:{
-             add(veg){
+               add(veg){
+                    this.$prompt("Enter Quantity of "+ veg.name).then((text) => {
+ veg.quantity=parseInt(text);
+
                 if(veg.quantity==0){
                     return 0;
                 }
@@ -64,8 +61,8 @@
     }
  });
 
-          }
-
+          });
+}
            },
                mounted(){
               
@@ -92,10 +89,11 @@ input::placeholder{
   margin-top:5px;
 
 }
-   .flex-container {
+   .flex_con {
   padding: 0;
- 
-  display: flex;
+ width: 100%;
+  display: flex;justify-content: space-between;
+  align-items: center;
 }
 .wrap    { 
   -webkit-flex-wrap: wrap;
@@ -105,12 +103,8 @@ input::placeholder{
 .img{
     width: 15vh;
 }
-.flex_con{
-  display:flex;
-}
-.flex1{
-  flex:1;
-}
+
+
 .name{font-size:20px;
  margin:5px;
  margin-bottom:20px; 
@@ -123,5 +117,15 @@ input::placeholder{
   font-size:1.2vh; 
    text-align: left; 
    margin:5px
+}
+.btnadd{
+     width: 10rem;
+     padding: 0px;
+      font-size:20px ;
+       height:30px;
+       margin-right: 2rem;
+}
+.add{
+    width: 100%;
 }
 </style>

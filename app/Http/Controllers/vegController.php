@@ -55,12 +55,13 @@ return $order;
 
      public function upload(Request $request){
       $addto=$request->addto;
-   
+  
 
  $filename=$request->file('file')->getClientoriginalName();
-
-
 $filenamefinal=$filename;
+$file=$request->file('file');
+$file->storeAs($addto,$filenamefinal, ['disk' => 'public_uploads']);
+return $file;
 // $path=$request->file('file')->storeAs('public/'.$addto,$filenamefinal);
     
     }

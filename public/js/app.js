@@ -1939,12 +1939,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1955,23 +1949,28 @@ __webpack_require__.r(__webpack_exports__);
     add: function add(veg) {
       var _this = this;
 
-      if (veg.quantity == 0) {
-        return 0;
-      }
+      this.$prompt("Enter Quantity of " + veg.name).then(function (text) {
+        veg.quantity = parseInt(text);
 
-      var clone = JSON.parse(JSON.stringify(veg));
-      this.$store.dispatch('cart/additemstocart', clone).then(function (res) {
-        if (res.status == 'ok') {
-          console.log('itemadded');
-          var data = {
-            'item': clone,
-            'color': 'green'
-          };
-
-          _this.$emit('shownotification', data);
-
-          veg.quantity = '';
+        if (veg.quantity == 0) {
+          return 0;
         }
+
+        var clone = JSON.parse(JSON.stringify(veg));
+
+        _this.$store.dispatch('cart/additemstocart', clone).then(function (res) {
+          if (res.status == 'ok') {
+            console.log('itemadded');
+            var data = {
+              'item': clone,
+              'color': 'green'
+            };
+
+            _this.$emit('shownotification', data);
+
+            veg.quantity = '';
+          }
+        });
       });
     }
   },
@@ -1998,6 +1997,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2096,6 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('file', this.file);
       data.append('addto', this.add);
       axios.post('/upload', data, config).then(function (res) {
+        console.log(res);
         existingObj.success = res.data.success;
       })["catch"](function (err) {
         existingObj.output = err;
@@ -2513,12 +2517,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2529,23 +2527,28 @@ __webpack_require__.r(__webpack_exports__);
     add: function add(fruit) {
       var _this = this;
 
-      if (fruit.quantity == 0) {
-        return 0;
-      }
+      this.$prompt("Enter Quantity of : " + fruit.name).then(function (text) {
+        fruit.quantity = parseInt(text);
 
-      var clone = JSON.parse(JSON.stringify(fruit));
-      this.$store.dispatch('cart/additemstocart', clone).then(function (res) {
-        if (res.status == 'ok') {
-          console.log('itemadded');
-          var data = {
-            'item': clone,
-            'color': 'green'
-          };
-
-          _this.$emit('shownotification', data);
-
-          fruit.quantity = '';
+        if (fruit.quantity == 0) {
+          return 0;
         }
+
+        var clone = JSON.parse(JSON.stringify(fruit));
+
+        _this.$store.dispatch('cart/additemstocart', clone).then(function (res) {
+          if (res.status == 'ok') {
+            console.log('itemadded');
+            var data = {
+              'item': clone,
+              'color': 'green'
+            };
+
+            _this.$emit('shownotification', data);
+
+            fruit.quantity = '';
+          }
+        });
       });
     }
   },
@@ -7250,7 +7253,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput::-moz-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput:-ms-input-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput::-ms-input-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput::placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\n.flex-container {\r\n  padding: 0;\r\n \r\n  display: flex;\n}\n.wrap    {\r\n  flex-wrap: wrap;\n}\n.img{\r\n    width: 15vh;\n}\n.flex_con{\r\n  display:flex;\n}\n.flex1{\r\n  flex:1;\n}\n.name{font-size:20px;\r\n margin:5px;\r\n margin-bottom:20px; \r\n margin-top:20px;\r\n  text-align: left;\n}\n.price\r\n{\r\n  font-size:1.2vh; \r\n   text-align: left; \r\n   margin:5px\n}\r\n", ""]);
+exports.push([module.i, "\ninput::-moz-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput:-ms-input-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput::-ms-input-placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\ninput::placeholder{\r\n  font-size:2vh;\r\n  margin-top:5px;\n}\n.flex_con {\r\n  padding: 0;\r\n width: 100%;\r\n  display: flex;justify-content: space-between;\r\n  align-items: center;\n}\n.wrap    {\r\n  flex-wrap: wrap;\n}\n.img{\r\n    width: 15vh;\n}\n.name{font-size:20px;\r\n margin:5px;\r\n margin-bottom:20px; \r\n margin-top:20px;\r\n  text-align: left;\n}\n.price\r\n{\r\n  font-size:1.2vh; \r\n   text-align: left; \r\n   margin:5px\n}\n.btnadd{\r\n     width: 10rem;\r\n     padding: 0px;\r\n      font-size:20px ;\r\n       height:30px;\r\n       margin-right: 2rem;\n}\n.add{\r\n    width: 100%;\n}\r\n", ""]);
 
 // exports
 
@@ -7345,7 +7348,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput[data-v-d141ba4e]::-moz-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput[data-v-d141ba4e]:-ms-input-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput[data-v-d141ba4e]::-ms-input-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput[data-v-d141ba4e]::placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\n.flex-container[data-v-d141ba4e] {\n  padding: 0;\n \n  display: flex;\n}\n.wrap[data-v-d141ba4e]    {\n  flex-wrap: wrap;\n}\n.img[data-v-d141ba4e]{\n    width: 15vh;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.flex_con[data-v-d141ba4e]{\n  display:flex;\n}\n.flex1[data-v-d141ba4e]{\n  flex:1;\n}\n.name[data-v-d141ba4e]{font-size:20px;\n margin:5px;\n margin-bottom:20px; \n margin-top:20px;\n  text-align: left;\n}\n.price[data-v-d141ba4e]\n{\n  font-size:1.2vh; \n   text-align: left; \n   margin:5px\n}\n", ""]);
+exports.push([module.i, "\ninput[data-v-d141ba4e]::-moz-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput[data-v-d141ba4e]:-ms-input-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput[data-v-d141ba4e]::-ms-input-placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\ninput[data-v-d141ba4e]::placeholder{\n  font-size:2vh;\n  margin-top:5px;\n}\n.flex_con[data-v-d141ba4e] {\n \n  padding: 0;\n width: 100%;\n  display: flex;justify-content: space-between;\n  align-items: center;\n}\n.wrap[data-v-d141ba4e]    {\n  flex-wrap: wrap;\n}\n.img[data-v-d141ba4e]{\n    width: 15vh;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.name[data-v-d141ba4e]{font-size:20px;\n margin:5px;\n margin-bottom:20px; \n margin-top:20px;\n  text-align: left;\n}\n.price[data-v-d141ba4e]\n{\n  font-size:1.2vh; \n   text-align: left; \n   margin:5px\n}\n.btnadd[data-v-d141ba4e]{\n     width: 10rem;\n     padding: 0px;\n      font-size:20px ;\n       height:30px;\n       margin-right: 2rem;\n}\n.add[data-v-d141ba4e]{\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -42416,14 +42419,14 @@ var render = function() {
     _vm._l(_vm.vegs, function(veg) {
       return _c("div", { staticClass: "card " }, [
         _c("div", { staticClass: "flex_con" }, [
-          _c("div", { staticClass: "img flex1" }, [
+          _c("div", { staticClass: "img " }, [
             _c("img", {
               staticClass: "img",
               attrs: { src: "/images/veg/" + veg.link, alt: "avtar" }
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: " flex1" }, [
+          _c("div", { staticClass: " " }, [
             _c("h4", { staticClass: "name" }, [
               _c("b", [_vm._v(_vm._s(veg.name))])
             ]),
@@ -42437,52 +42440,18 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "Add flex1" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: veg.quantity,
-                  expression: "veg.quantity"
-                }
-              ],
-              staticStyle: {
-                width: "100%",
-                height: "4.5vh",
-                "margin-top": "2vh",
-                "margin-bottom": "1vh",
-                "font-size": "2vh"
-              },
-              attrs: { type: "text", height: "", placeholder: "ADD-Quantity" },
-              domProps: { value: veg.quantity },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(veg, "quantity", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
+          _c("div", { staticClass: "Add " }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-primary",
-                staticStyle: {
-                  padding: "0px",
-                  "font-size": "20px",
-                  width: "80%",
-                  height: "30px"
-                },
+                staticClass: "btnadd btn-primary",
                 on: {
                   click: function($event) {
                     return _vm.add(veg)
                   }
                 }
               },
-              [_vm._v("ADD")]
+              [_vm._v("ADD Quantity")]
             )
           ])
         ])
@@ -42514,23 +42483,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "add" }, [
-    _c(
-      "form",
-      {
-        attrs: { enctype: "multipart/form-data" },
-        on: { submit: _vm.formSubmit }
-      },
-      [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "file" },
-          on: { change: _vm.onChange }
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn  btn-block" }, [_vm._v("Upload")])
-      ]
-    ),
-    _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", [_vm._v("Name")]),
       _vm._v(" "),
@@ -42561,27 +42513,40 @@ var render = function() {
     _c("div", { staticClass: "form-group" }, [
       _c("label", [_vm._v("add")]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.add,
-            expression: "add"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.add },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.add,
+              expression: "add"
             }
-            _vm.add = $event.target.value
+          ],
+          staticClass: "Addto",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.add = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
           }
-        }
-      })
+        },
+        [
+          _c("option", { attrs: { value: "fruit" } }, [_vm._v("Fruit")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "veg" } }, [_vm._v("veg")])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
@@ -42656,6 +42621,23 @@ var render = function() {
         }
       })
     ]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        attrs: { enctype: "multipart/form-data" },
+        on: { submit: _vm.formSubmit }
+      },
+      [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "file" },
+          on: { change: _vm.onChange }
+        }),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn  btn-block" }, [_vm._v("Upload")])
+      ]
+    ),
     _vm._v(" "),
     _c(
       "button",
@@ -43012,14 +42994,14 @@ var render = function() {
     _vm._l(_vm.fruits, function(fruit) {
       return _c("div", { staticClass: "card " }, [
         _c("div", { staticClass: "flex_con" }, [
-          _c("div", { staticClass: "img flex1" }, [
+          _c("div", { staticClass: "img " }, [
             _c("img", {
               staticClass: "img",
               attrs: { src: "/images/fruit/" + fruit.link, alt: fruit.name }
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: " flex1" }, [
+          _c("div", {}, [
             _c("h4", { staticClass: "name" }, [
               _c("b", [_vm._v(_vm._s(fruit.name))])
             ]),
@@ -43033,39 +43015,11 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "Add flex1" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: fruit.quantity,
-                  expression: "fruit.quantity"
-                }
-              ],
-              staticStyle: {
-                width: "100%",
-                height: "4.5vh",
-                "margin-top": "2vh",
-                "margin-bottom": "1vh",
-                "font-size": "2vh"
-              },
-              attrs: { type: "text", height: "", placeholder: "ADD-Quantity" },
-              domProps: { value: fruit.quantity },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(fruit, "quantity", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
+          _c("div", { staticClass: "Add 1" }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-primary",
+                staticClass: "btnadd btn-primary",
                 staticStyle: {
                   padding: "0px",
                   "font-size": "20px",
@@ -43078,7 +43032,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("ADD")]
+              [_vm._v("ADD quantity")]
             )
           ])
         ])
