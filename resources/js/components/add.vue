@@ -68,14 +68,25 @@
 			stock:0,
 			add:'',
 imagelink:'',
-file:''
+file:'',
+upload:false
+
 			 }
 		},
 
 		methods:{
 			
 			fun(){
-         	
+				console.log(this.add);
+         
+         if(!this.valid())
+{
+	return ;
+
+}
+    
+
+
 				axios.post('/add',{
 					name:this.name,
 					price:this.price,
@@ -84,7 +95,27 @@ file:''
 					add:this.add,
 					imagelink:this.imagelink
 					
-				}).then((re)=>{console.log(re)});
+				}).then((re)=>{console.log(re)
+				 if(re.status==201)
+            {
+            	 const data={
+            'message':"added sucessful",
+
+             'for':'sucessful'}
+
+	this.$emit('shownotification',data);
+           }
+           else{
+ 	 const data={
+            'message':"unsucessful try again",
+
+             'for':'unsucessful'}
+
+	this.$emit('shownotification',data);
+             }
+
+	
+});
 			},
 			onChange(e) {
                 this.file = e.target.files[0];
@@ -101,17 +132,73 @@ file:''
                     }
                 }
 
-                let data = new FormData();
-                data.append('file', this.file);
-data.append('addto',this.add);
-                axios.post('/upload', data, config)
+               const datafile = new FormData();
+                datafile.append('file', this.file);
+              
+                if(!this.valid())
+{
+	return ;
+
+}
+datafile.append('addto',this.add);
+                axios.post('/upload',datafile, config)
                     .then(function (res) {
-                    	console.log(res);
+                    	console.log(res.status);
+                    	this.upload=res.status==200?true:false;
+                    	
                         existingObj.success = res.data.success;
                     })
                     .catch(function (err) {
                         existingObj.output = err;
                     });
+console.log(this.upload);
+ if(this.upload)
+            {
+            	 const data={
+            'message':"added sucessful",
+
+             'for':'sucessful'}
+
+	this.$emit('shownotification',data);
+           }
+           else{
+ 	 const data={
+            'message':"unsucessful try again",
+
+             'for':'unsucessful'}
+
+	this.$emit('shownotification',data);
+             }
+
+                
+            },
+            valid(){
+            
+            	if(this.file==''){
+         		 const data={
+            'message':'Select image first',
+              'for':'error'}
+
+            this.$emit('shownotification',data);
+           return false;
+         	}
+         	if(this.add==''){
+         		 const data={
+            'message':' ADD  field Required',
+              'for':'error'}
+
+            this.$emit('shownotification',data);
+           return  false;
+         	}
+         		if(this.name==''||this.price==0||this.stock==0||this.id==''){
+         		 const data={
+            'message':'fill Required field',
+              'for':'error'}
+
+            this.$emit('shownotification',data);
+              return false  ;
+         	}
+         	return true;
             }
 
 		}

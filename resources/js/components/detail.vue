@@ -169,8 +169,16 @@ justify-content: space-between;
             'message':"ordered sucessful",
 
              'for':'order'}
+           }
+           else{
+ 	 const data={
+            'message':"unsucessful",
+
+             'for':'order'}
+             }
+
 	this.$emit('shownotification',data);
-            }
+            
             this.$store.dispatch('cart/clearcart')
            this.$router.push('/vue1')
 

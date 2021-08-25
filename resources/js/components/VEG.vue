@@ -54,7 +54,7 @@
         
         const data={
             'item':clone,
-             'color':'green'}
+              'for':'add'}
 
             this.$emit('shownotification',data);
            veg.quantity='';

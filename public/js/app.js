@@ -1963,7 +1963,7 @@ __webpack_require__.r(__webpack_exports__);
             console.log('itemadded');
             var data = {
               'item': clone,
-              'color': 'green'
+              'for': 'add'
             };
 
             _this.$emit('shownotification', data);
@@ -2066,11 +2066,20 @@ __webpack_require__.r(__webpack_exports__);
       stock: 0,
       add: '',
       imagelink: '',
-      file: ''
+      file: '',
+      upload: false
     };
   },
   methods: {
     fun: function fun() {
+      var _this = this;
+
+      console.log(this.add);
+
+      if (!this.valid()) {
+        return;
+      }
+
       axios.post('/add', {
         name: this.name,
         price: this.price,
@@ -2080,6 +2089,22 @@ __webpack_require__.r(__webpack_exports__);
         imagelink: this.imagelink
       }).then(function (re) {
         console.log(re);
+
+        if (re.status == 201) {
+          var data = {
+            'message': "added sucessful",
+            'for': 'sucessful'
+          };
+
+          _this.$emit('shownotification', data);
+        } else {
+          var _data = {
+            'message': "unsucessful try again",
+            'for': 'unsucessful'
+          };
+
+          _this.$emit('shownotification', _data);
+        }
       });
     },
     onChange: function onChange(e) {
@@ -2095,15 +2120,66 @@ __webpack_require__.r(__webpack_exports__);
           'content-type': 'multipart/form-data'
         }
       };
-      var data = new FormData();
-      data.append('file', this.file);
-      data.append('addto', this.add);
-      axios.post('/upload', data, config).then(function (res) {
-        console.log(res);
+      var datafile = new FormData();
+      datafile.append('file', this.file);
+
+      if (!this.valid()) {
+        return;
+      }
+
+      datafile.append('addto', this.add);
+      axios.post('/upload', datafile, config).then(function (res) {
+        console.log(res.status);
+        this.upload = res.status == 200 ? true : false;
         existingObj.success = res.data.success;
       })["catch"](function (err) {
         existingObj.output = err;
       });
+      console.log(this.upload);
+
+      if (this.upload) {
+        var data = {
+          'message': "added sucessful",
+          'for': 'sucessful'
+        };
+        this.$emit('shownotification', data);
+      } else {
+        var _data2 = {
+          'message': "unsucessful try again",
+          'for': 'unsucessful'
+        };
+        this.$emit('shownotification', _data2);
+      }
+    },
+    valid: function valid() {
+      if (this.file == '') {
+        var data = {
+          'message': 'Select image first',
+          'for': 'error'
+        };
+        this.$emit('shownotification', data);
+        return false;
+      }
+
+      if (this.add == '') {
+        var _data3 = {
+          'message': ' ADD  field Required',
+          'for': 'error'
+        };
+        this.$emit('shownotification', _data3);
+        return false;
+      }
+
+      if (this.name == '' || this.price == 0 || this.stock == 0 || this.id == '') {
+        var _data4 = {
+          'message': 'fill Required field',
+          'for': 'error'
+        };
+        this.$emit('shownotification', _data4);
+        return false;
+      }
+
+      return true;
     }
   }
 });
@@ -2391,13 +2467,18 @@ __webpack_require__.r(__webpack_exports__);
         items: JSON.stringify(this.lists)
       }).then(function (re) {
         if (re.status == 201) {
-          var data = {
+          var _data = {
             'message': "ordered sucessful",
             'for': 'order'
           };
-
-          _this.$emit('shownotification', data);
+        } else {
+          var _data2 = {
+            'message': "unsucessful",
+            'for': 'order'
+          };
         }
+
+        _this.$emit('shownotification', data);
 
         _this.$store.dispatch('cart/clearcart');
 
@@ -2411,12 +2492,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('cart/deleteitem', item.cartid).then(function (res) {
         if (res.status = 'ok') {
           console.log(clone);
-          var data = {
+          var _data3 = {
             'item': clone,
             'for': 'delete'
           };
 
-          _this2.$emit('shownotification', data);
+          _this2.$emit('shownotification', _data3);
         }
       });
     },
@@ -2438,12 +2519,12 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.$store.dispatch('cart/edititem', data).then(function (res) {
         if (res.status == 'ok') {
-          var _data = {
+          var _data4 = {
             'item': item,
             'for': 'edit'
           };
 
-          _this4.$emit('shownotification', _data);
+          _this4.$emit('shownotification', _data4);
         }
       });
     }
@@ -2541,7 +2622,7 @@ __webpack_require__.r(__webpack_exports__);
             console.log('itemadded');
             var data = {
               'item': clone,
-              'color': 'green'
+              'for': 'add'
             };
 
             _this.$emit('shownotification', data);
@@ -2764,6 +2845,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['notificationdata'],
   computed: {
     data: function data() {
+      console.log('asdf');
       return this.notificationdata.item ? this.notificationdata.item : this.notificationdata;
     }
   }

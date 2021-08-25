@@ -19,7 +19,7 @@
 		 props:['notificationdata'],
  computed:{
  	data(){
- 		
+ 		console.log('asdf');
   return this.notificationdata.item?this.notificationdata.item:this.notificationdata; 
 },
 
